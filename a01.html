@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>test</title>
+        <link rel="stylesheet" type="text/css" href="test.css">
+   </head>
+    <body>
+        <h1>フォームに入れた文字を反映させるだけ</h1>
+        <div class="img_zone">
+            <div>
+                <img src="1.svg" id="post1">
+                <textarea id="input1">タグ1,</textarea> 
+            </div>
+            <div>
+                <img src="2.svg" id="post2">
+                <textarea id="input2"></textarea> 
+            </div>
+            <div>
+                <img src="3.svg" id="post3">
+                <textarea id="input3"></textarea> 
+            </div>
+        </div>
+
+        <div class="tags">
+            <input type="button" value="タグ1" class="tag">
+            <input type="button" value="タグ2" class="tag">
+            <input type="button" value="タグ3" class="tag">
+            <input type="button" value="タグ4" class="tag">
+            <br><br>
+            <input type="text" id="post_tag">
+            <input type="button" id="button" value="button"> 
+        </div>
+        <script>
+            const images=document.querySelectorAll('img');
+            const button=document.getElementById('button');
+            const tags=document.querySelectorAll('.tag');
+            const tagInputted=document.getElementById('post_tag');
+
+            window.onload=function(){
+                images.forEach( (image)=>{
+                    image.addEventListener('click',selectImageToggle );
+                }); 
+
+                tags.forEach( (tag)=>{
+                    tag.addEventListener('click',selectTagToggle );
+                    if(tagInputted.value.includes(tag.value)===true){
+                        tag.classList.add('select_tag');
+                    };
+                }); 
+            }
+
+            button.addEventListener('click',()=>{
+                const selectedImages=document.querySelectorAll('.select_image');
+                selectedImages.forEach( (selectedImage)=>{
+                    selectedImage.nextElementSibling.value=tagInputted.value;
+                }); 
+            });
+
+            function selectImageToggle(){
+                this.classList.toggle('select_image');
+            };
+
+            function selectTagToggle(){
+                if(tagInputted.value.includes(this.value)===true){
+                    tagInputted.value=tagInputted.value.replace(`${this.value}\,`,``);
+                } else{
+                    tagInputted.value+=this.value+"\,";
+                };
+                this.classList.toggle('select_tag');
+            };
+
+           
+        </script>
+
+        <footer><a href="./">テスト一覧へ戻る</a></footer>
+    </body>
+</html>

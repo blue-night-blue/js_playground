@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>画像とボタンの選択</title>
+  <style>
+img{
+  height: 100px;
+}
+
+.selected {
+  border: 2px solid red;
+}
+
+.selected-button {
+  background-color: yellow;
+}
+  </style>
+</head>
+<body>
+  <h1>画像の選択とボタンの操作</h1>
+  <div id="image-group">
+    <img src="1.svg" onclick="changeImageColor(this)" />
+    <img src="2.svg" onclick="changeImageColor(this)" />
+    <img src="3.svg" onclick="changeImageColor(this)" />
+  </div>
+  
+  <textarea id="text-area"></textarea>
+  
+  <div id="button-group">
+    <button onclick="toggleButtonSelection(this)">Button 1</button>
+    <button onclick="toggleButtonSelection(this)">Button 2</button>
+    <button onclick="toggleButtonSelection(this)">Button 3</button>
+  </div>
+  
+    <script>
+function changeImageColor(image) {
+  image.classList.toggle('selected');
+}
+
+function toggleButtonSelection(button) {
+  button.classList.toggle('selected-button');
+  
+  var textArea = document.getElementById('text-area');
+  var buttonText = button.innerText;
+  
+  if (textArea.value.includes(buttonText)) {
+    textArea.value = textArea.value.replace(buttonText, '');
+  } else {
+    textArea.value += buttonText;
+  }
+}
+  </script>
+
+以下、私の追記。<br><br>
+
+ChatGPT上で、<a href="./a06.html">丸投げして返ってきた回答</a>に対してbadマーク付けて、
+「<a href="./a03.html">テスト3</a>みたいにしてほしかった」ってコメントしたら
+今回のコードが返ってきました。これも違うんだけどね・・・。
+さっきよりはマシ。といっても10段階中2が4になった程度だが。
+(プログラミング初心者に言われたかねえだろうけども)
+        <footer><a href="./">テスト一覧へ戻る</a></footer>
+</body>
+</html>
+
+
+
+
+
+

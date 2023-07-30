@@ -1,0 +1,88 @@
+/* 共通 */
+body{
+    background-color: #eee;
+}
+
+h1{
+    margin:0;
+    font-size: 1em;
+}
+
+h1:nth-child(n + 2) {
+    margin-top: 3em;
+}
+  
+
+li{
+    margin-bottom: 1em;
+}
+
+footer{
+    margin-top: 2em;
+}
+
+
+
+
+/* 一括タグ付け */
+
+.img_zone{
+    display: flex;
+} 
+
+.img_zone div{
+    width: calc(33% - 10px);
+    padding: 10px;
+} 
+
+.img_zone img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover; 
+    display: block;
+}
+
+.img_zone textarea{
+    margin-top: 10px; 
+    height: 3em; 
+    width: 100%;
+}
+
+.select_tag{
+    background-color: #8f8;
+}
+
+.select_image{
+    opacity: 0.5;
+    border: #f8f 10px solid;
+    box-sizing: border-box;
+}
+
+#add,
+#delete{
+    width:200px;
+    display: block;
+    margin-top: 1em;
+}
+
+
+
+
+
+/* bootstrap実験用 */
+
+.bnb-container-all{
+    display: flex;
+    border: #f8f 5px solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px; 
+}
+
+.bnb-container{
+    border: #8f8 5px solid;
+    border-radius: 10px;
+    width: 33%;
+    padding: 10px;
+    margin: 20px; 
+}

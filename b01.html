@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>test</title>
+        <link rel="stylesheet" type="text/css" href="test.css">
+        <style>
+            /* 画像コンテナのスタイル */
+            .image-container {
+              width: 100%;
+              height: 300px;
+              overflow: hidden;
+              position: relative;
+            }
+        
+            /* 画像のスタイル */
+            .image-container img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          </style>
+    </head>
+    <body>
+        <h1>ChatGPT丸投げ</h1>
+        <div class="image-container">
+            <img src="1.svg" alt="Image 1">
+          </div>
+        
+          <script>
+            var imageContainer = document.querySelector('.image-container');
+            var image = document.querySelector('.image-container img');
+        
+            var startX;
+            var currentX;
+            var threshold = 100; // スワイプの閾値
+        
+            // タッチ開始時の処理
+            imageContainer.addEventListener('touchstart', function(event) {
+              startX = event.touches[0].clientX;
+            });
+        
+            // タッチ移動時の処理
+            imageContainer.addEventListener('touchmove', function(event) {
+              currentX = event.touches[0].clientX;
+            });
+        
+            // タッチ終了時の処理
+            imageContainer.addEventListener('touchend', function(event) {
+              var diffX = startX - currentX;
+        
+              if (diffX > threshold) {
+                // 右にスワイプした場合の処理（次のページへ移動）
+                // ここに次のページへの移動のコードを記述する
+              } else if (diffX < -threshold) {
+                // 左にスワイプした場合の処理（前のページへ移動）
+                // ここに前のページへの移動のコードを記述する
+              }
+            });
+          </script>
+
+        <footer><a href="./">テスト一覧へ戻る</a></footer>
+    </body>
+</html>

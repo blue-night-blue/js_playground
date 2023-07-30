@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>test</title>
+        <link rel="stylesheet" type="text/css" href="test.css">
+    </head>
+    <body>
+        <h1>ボタンをオンにした状態で画像選択するとタグを反映</h1>
+        <div class="img_zone">
+            <div>
+                <img src="1.svg" id="post1">
+                <textarea id="input1">タグ1,</textarea> 
+            </div>
+            <div>
+                <img src="2.svg" id="post2">
+                <textarea id="input2"></textarea> 
+            </div>
+            <div>
+                <img src="3.svg" id="post3">
+                <textarea id="input3"></textarea> 
+            </div>
+        </div>
+
+        <div class="tags">
+            <input type="button" value="タグ1" class="tag">
+            <input type="button" value="タグ2" class="tag">
+            <input type="button" value="タグ3" class="tag">
+            <input type="button" value="タグ4" class="tag">
+        </div>
+        
+        <script>
+            const images=document.querySelectorAll('img');
+            const tags=document.querySelectorAll('.tag');
+
+            window.onload=function(){
+                images.forEach( (image)=>{
+                    image.addEventListener('click',selectImageToggle );
+                }); 
+
+                tags.forEach( (tag)=>{
+                    tag.addEventListener('click',selectTagToggle );
+                }); 
+            }
+
+            function selectImageToggle(){
+                const selectedTags=document.querySelectorAll('.select_tag');
+                const addedTag=this.nextElementSibling;
+                     
+                // 画像を選択すると、オンになっているタグを挿入する
+                selectedTags.forEach( (selectedTag)=>{
+                    if(addedTag.value.includes(selectedTag.value)===false){
+                        addedTag.value+=selectedTag.value+"\,";
+                    };
+                }); 
+                this.classList.toggle('select_image');
+            };
+
+            function selectTagToggle(){
+                const selectedImages=document.querySelectorAll('.select_image');
+                selectedImages.forEach( (selectedImage)=>{
+                    const addedTag=selectedImage.nextElementSibling;
+                    
+                    // タグをオンにする
+                    if(this.classList.contains('select_tag') == false ){
+                        if(addedTag.value.includes(this.value)===false){
+                            addedTag.value+=this.value+"\,";
+                        };
+                    // タグをオフにする
+                    } else{
+                        if(addedTag.value.includes(this.value)===true){
+                            addedTag.value=addedTag.value.replace(`${this.value}\,`,``);
+                        };
+                    };
+
+                }); 
+                this.classList.toggle('select_tag');
+            };
+
+           
+        </script>
+
+        <footer><a href="./">テスト一覧へ戻る</a></footer>
+    </body>
+</html>

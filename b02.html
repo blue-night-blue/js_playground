@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>test</title>
+        <link rel="stylesheet" type="text/css" href="test.css">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    </head>
+    <body>
+        <h1>ChatGPT丸投げ(スワイプJSを使って書き換えて。)</h1>
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="1.svg" alt="Image 1">
+            </div>
+            <div class="swiper-slide">
+              <img src="2.svg" alt="Image 2">
+            </div>
+            <div class="swiper-slide">
+              <img src="3.svg" alt="Image 3">
+            </div>
+          </div>
+        </div>
+      
+        <script>
+          var swiper = new Swiper('.swiper-container', {
+            direction: 'horizontal',
+            loop: true,
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            },
+          });
+        </script>
+
+        <footer><a href="./">テスト一覧へ戻る</a></footer>
+    </body>
+</html>

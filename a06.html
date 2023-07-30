@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>画像とボタンの選択</title>
+  <style>
+    img{
+      height: 100px;
+    }
+    
+    .selected {
+      border: 2px solid red;
+    }
+  </style>
+</head>
+<body>
+  <h1>画像の選択とボタンの操作</h1>
+  <div id="images">
+    <img src="1.svg" onclick="selectImage(this)">
+    <textarea></textarea>
+    <br>
+    <img src="2.svg" onclick="selectImage(this)">
+    <textarea></textarea>
+    <br>
+    <img src="3.svg" onclick="selectImage(this)">
+    <textarea></textarea>
+  </div>
+  <div id="buttons">
+    <button onclick="selectButton(this)">ボタン1</button>
+    <button onclick="selectButton(this)">ボタン2</button>
+    <button onclick="selectButton(this)">ボタン3</button>
+  </div>
+
+  <script>
+    function selectImage(image) {
+      image.classList.toggle("selected");
+    }
+
+    function selectButton(button) {
+      button.classList.toggle("selected");
+      var textArea = document.querySelector(".selected + textarea");
+      if (textArea) {
+        textArea.value = button.innerText;
+      }
+    }
+  </script>
+
+以下、私の追記。<br><br>
+
+これはChatGPTに書いてもらったコードです。画像ソース・画像CSSは修正しています。<br><br>
+
+ChatGPTへの質問:<br>
+HTML、CSS、JavaScriptで下記のコードを書いてほしい。
+複数画像があり、クリックすると画像の色が変わり、複数選択出来る。
+それぞれの画像の下に、空白のテキストエリアがある。
+画像群の下に複数のボタンがあり、ボタンをクリックするとボタンの色が変わり、複数選択できる。
+画像を選択した状態でボタンをクリックすると、ボタンの文字がテキストエリアに挿入される。
+もう一度ボタンをクリックすると、テキストエリアに挿入されているそのボタンの文字が消される。
+<br><br>
+ChatGPTからの回答<br>
+このソースコード(viewportだけ私が足してます)に加え、下記文章。<br>
+上記のコードでは、画像をクリックすると選択状態が切り替わり、
+選択された画像の下のテキストエリアにはボタンの文字が挿入されます。
+また、ボタンをクリックすると選択状態が切り替わり、
+選択されたボタンの文字がテキストエリアに挿入されます。
+同じボタンをもう一度クリックすると、テキストエリアからそのボタンの文字が削除されます。
+  
+        <footer><a href="./">テスト一覧へ戻る</a></footer>
+</body>
+</html>
+
+
+
+
+
+

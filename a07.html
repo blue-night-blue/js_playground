@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>test</title>
+        <link rel="stylesheet" type="text/css" href="test.css">
+    </head>
+    <body>
+        <h1>フォームに入れた文字を追加/削除ボタンにて反映させる</h1>
+        <p>注:ChatGPTに、「下記について、より簡潔にコードを書いてほしい。(テスト5のhtmlまるまる全部)」
+            と聞いてみた結果です。なんか、画像クリックのトグルが丸々消されておる。よって動かぬ。</p>
+        <div class="img_zone">
+            <div>
+                <img src="1.svg" id="post1">
+                <textarea id="input1">タグ1,</textarea> 
+            </div>
+            <div>
+                <img src="2.svg" id="post2">
+                <textarea id="input2"></textarea> 
+            </div>
+            <div>
+                <img src="3.svg" id="post3">
+                <textarea id="input3"></textarea> 
+            </div>
+        </div>
+
+        <div class="tags">
+            <input type="button" value="タグ1" onclick="toggleTag(this)" class="tag">
+            <input type="button" value="タグ2" onclick="toggleTag(this)" class="tag">
+            <input type="button" value="タグ3" onclick="toggleTag(this)" class="tag">
+            <input type="button" value="タグ4" onclick="toggleTag(this)" class="tag">
+        </div>
+        
+        <div class="add_and_delete">
+            <input type="button" value="追加" id="add" onclick="addTags()">
+            <input type="button" value="削除" id="delete" onclick="removeTags()">
+        </div>
+        
+        <script>
+            function toggleTag(button) {
+                button.classList.toggle('select_tag');
+            }
+
+            function addTags() {
+                const selectedTags = document.querySelectorAll('.select_tag');
+                const selectedImages = document.querySelectorAll('.select_image');
+                selectedImages.forEach((selectedImage) => {
+                    const addedTag = selectedImage.nextElementSibling;
+                    selectedTags.forEach((selectedTag) => {
+                        if (!addedTag.value.includes(selectedTag.value)) {
+                            addedTag.value += selectedTag.value + ",";
+                        }
+                    });
+                });
+            }
+
+            function removeTags() {
+                const selectedTags = document.querySelectorAll('.select_tag');
+                const selectedImages = document.querySelectorAll('.select_image');
+                selectedImages.forEach((selectedImage) => {
+                    const addedTag = selectedImage.nextElementSibling;
+                    selectedTags.forEach((selectedTag) => {
+                        if (addedTag.value.includes(selectedTag.value)) {
+                            addedTag.value = addedTag.value.replace(`${selectedTag.value},`, "");
+                        }
+                    });
+                });
+            }
+        </script>
+
+        <footer><a href="./">テスト一覧へ戻る</a></footer>
+    </body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>test</title>
+        <link rel="stylesheet" type="text/css" href="test.css">
+    </head>
+    <body>
+        <h1>フォームに入れた文字を追加/削除ボタンにて反映させる</h1>
+        <div class="img_zone">
+            <div>
+                <img src="1.svg" id="post1">
+                <textarea id="input1">タグ1,</textarea> 
+            </div>
+            <div>
+                <img src="2.svg" id="post2">
+                <textarea id="input2"></textarea> 
+            </div>
+            <div>
+                <img src="3.svg" id="post3">
+                <textarea id="input3"></textarea> 
+            </div>
+        </div>
+
+        <div class="tags">
+            <input type="button" value="タグ1" class="tag">
+            <input type="button" value="タグ2" class="tag">
+            <input type="button" value="タグ3" class="tag">
+            <input type="button" value="タグ4" class="tag">
+        </div>
+        
+         <div class="add_and_delete">
+            <input type="button" value="追加" id="add">
+            <input type="button" value="削除" id="delete">
+        </div>
+        
+        <script>
+            const images=document.querySelectorAll('img');
+            const tags=document.querySelectorAll('.tag');
+            const addTag=document.getElementById('add');
+            const deleteTag=document.getElementById('delete');
+
+            window.onload=function(){
+                images.forEach( (image)=>{
+                    image.addEventListener('click',selectImageToggle );
+                }); 
+
+                tags.forEach( (tag)=>{
+                    tag.addEventListener('click',selectTagToggle );
+                }); 
+            };
+
+            function selectImageToggle(){
+                this.classList.toggle('select_image');
+            };
+
+            function selectTagToggle(){
+                this.classList.toggle('select_tag');
+            };
+
+            addTag.addEventListener('click',()=>{
+                const selectedTags=document.querySelectorAll('.select_tag');
+                selectedTags.forEach( (selectedTag)=>{
+                    const selectedImages=document.querySelectorAll('.select_image');
+                    selectedImages.forEach( (selectedImage)=>{
+                        const addedTag=selectedImage.nextElementSibling;
+                        if(addedTag.value.includes(selectedTag.value)===false){
+                            addedTag.value+=selectedTag.value+"\,";
+                        };
+                    }); 
+                }); 
+           });
+
+            deleteTag.addEventListener('click',()=>{
+                const selectedTags=document.querySelectorAll('.select_tag');
+                selectedTags.forEach( (selectedTag)=>{
+                    const selectedImages=document.querySelectorAll('.select_image');
+                    selectedImages.forEach( (selectedImage)=>{
+                        const addedTag=selectedImage.nextElementSibling;
+                        if(addedTag.value.includes(selectedTag.value)===true){
+                            addedTag.value=addedTag.value.replace(`${selectedTag.value}\,`,``);
+                        };
+                    }); 
+                }); 
+           });
+        </script>
+
+        <footer><a href="./">テスト一覧へ戻る</a></footer>
+    </body>
+</html>
