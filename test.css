@@ -23,6 +23,12 @@ footer{
 
 
 
+/* トップ */
+
+.top{
+    margin-bottom: 200px;
+}
+
 
 /* 一括タグ付け */
 
@@ -85,4 +91,55 @@ footer{
     width: 33%;
     padding: 10px;
     margin: 20px; 
+}
+
+
+/* svg実験 */
+.h1_svg{
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32px 24px"><path fill="%23000" d="M31.42,3.31,28.62.57A2,2,0,0,0,27.21,0a1.91,1.91,0,0,0-1.4.57L12.26,13.83,6.2,7.88a2,2,0,0,0-1.41-.57,1.91,1.91,0,0,0-1.4.57L.58,10.63a1.91,1.91,0,0,0,0,2.74L10.86,23.43a2,2,0,0,0,2.81,0L31.42,6.06A1.85,1.85,0,0,0,32,4.69a1.85,1.85,0,0,0-.58-1.38Z" /></svg>');
+}
+
+.h1_svg2:before{
+    content: url('data:image/svg+xml;utf8,<svg width="30" height="30" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><path id="path557" fill="%23{$color}" d="M 13.6679 0.013952637 L 0.41341146 13.120129 L 13.871505 26.496574 L 26.514661 26.496574 L 26.514661 0.013952637 L 13.6679 0.013952637 z M 9.5332682 10.042281 A 2.5445325 2.5445325 0 0 1 12.077816 12.586829 A 2.5445325 2.5445325 0 0 1 9.5332682 15.131376 A 2.5445325 2.5445325 0 0 1 6.9892375 12.586829 A 2.5445325 2.5445325 0 0 1 9.5332682 10.042281 z " /></svg> ');
+}
+
+.h1_svg2{
+    margin:10px;
+    background-color: #f0f;
+}
+
+.h1_svg3{
+    position: relative;
+    padding-left: 40px;
+    background-image:
+        radial-gradient(circle, white 6px, transparent 0px),
+        linear-gradient(135deg, transparent 16px, #f0f 1px),
+        linear-gradient(45deg, transparent 16px, #f0f 1px);
+    background-repeat: no-repeat;
+    background-size: 40px, 100% 50%, 100% 50%;
+    background-position: left, top, bottom;
+    font-size: 30px;
+    overflow: hidden;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.h1_svg4{
+    position: relative;
+    padding-left: 25px;
+    background-image:
+        radial-gradient(circle, white 4px, transparent 0px),
+        linear-gradient(135deg, transparent 10px, #0ff 1px),
+        linear-gradient(45deg, transparent 10px, #0ff 1px);
+    background-repeat: no-repeat;
+    background-size: 30px, 100% 50%, 100% 50%;
+    background-position: left, top, bottom;
+    font-size: 20px;
+    overflow: hidden;
+    border-radius: 10px;
+    color: #000;
+}
+
+.svg_container{
+    margin-top: 500px;
 }
