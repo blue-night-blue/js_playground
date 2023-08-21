@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>test</title>
+        <link rel="stylesheet" type="text/css" href="test.css">
+    </head>
+    <body>
+        <h1>シンプルなスワイプ</h1>
+          
+         <img src="1.svg" class="image_touch"> 
+          
+          
+          
+          
+<script>
+const imageTouch=document.querySelector('.image_touch');
+let startX = 0;
+let endX = 0;
+
+imageTouch.addEventListener('touchstart', (e) =>  {
+  startX = e.touches[0].pageX;
+});
+
+imageTouch.addEventListener('touchmove', (e) =>  {
+  endX = e.changedTouches[0].pageX;
+});
+
+imageTouch.addEventListener('touchend', (e) =>  {
+  if(endX == 0){
+    console.log('何も起こらない1');
+  }else if(startX - endX <= -30){
+    console.log('左へ');
+  }else if(startX - endX >= 30){
+    console.log('右へ');
+    window.location.href = "./b03-2.html";
+  }else{
+    console.log('何も起こらない2');
+  };
+
+  startX = 0;
+  endX = 0; 
+
+});         
+
+</script>
+
+        <footer><a href="./">テスト一覧へ戻る</a></footer>
+    </body>
+</html>

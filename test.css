@@ -23,11 +23,21 @@ footer{
 
 
 
+
+
+
+
 /* トップ */
 
 .top{
     margin-bottom: 200px;
 }
+
+
+
+
+
+
 
 
 /* 一括タグ付け */
@@ -71,6 +81,17 @@ footer{
     margin-top: 1em;
 }
 
+
+
+
+
+/* スワイプ */
+
+.image_touch{
+    width: 90%;
+    border: #000 1px solid;
+    margin: 100px auto;
+}
 
 
 
