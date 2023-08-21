@@ -4,11 +4,16 @@ body{
 }
 
 h1{
+    margin-bottom:3em;
+    font-size: 1.5em;
+}
+
+h2{
     margin:0;
     font-size: 1em;
 }
 
-h1:nth-child(n + 2) {
+h2:nth-child(n + 2) {
     margin-top: 3em;
 }
   
@@ -87,10 +92,14 @@ footer{
 
 /* スワイプ */
 
+.nav{
+    margin-top: 50px;
+}
+
 .image_touch{
     width: 90%;
     border: #000 1px solid;
-    margin: 100px auto;
+    margin-bottom: 100px;
 }
 
 

@@ -8,6 +8,11 @@
     </head>
     <body>
         <h1>シンプルなスワイプ</h1>
+
+         <div class="nav">
+          <a href="./b03-1.html" class="prev">前</a> /  
+          <a href="./b03-3.html" class="next">次</a> 
+         </div>
           
          <img src="2.svg" class="image_touch"> 
           
@@ -16,6 +21,8 @@
           
 <script>
 const imageTouch=document.querySelector('.image_touch');
+const linkPrev=document.querySelector('.prev');
+const linkNext=document.querySelector('.next');
 let startX = 0;
 let endX = 0;
 
@@ -32,10 +39,10 @@ imageTouch.addEventListener('touchend', (e) =>  {
     console.log('何も起こらない1');
   }else if(startX - endX <= -30){
     console.log('左へ');
-    window.location.href = "./b03-1.html";
+    window.location.href = linkPrev.getAttribute("href");
   }else if(startX - endX >= 30){
     console.log('右へ');
-    window.location.href = "./b03-3.html";
+    window.location.href = linkNext.getAttribute("href");
   }else{
     console.log('何も起こらない2');
   };
