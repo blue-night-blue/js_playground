@@ -173,3 +173,36 @@ footer{
 .svg_container{
     margin-top: 500px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* 検索アルゴリズム */
+.container_search{
+    margin-bottom: 50px;
+}
+
+#tag_index_container th,
+#tag_index_container td{
+    border: #000 solid 1px;
+}
+
+.selected_tag_inputted{
+    width: 50%;
+    display: block;
+}
+
+.select_tag{
+    background-color: yellow;
+}
+
+
+

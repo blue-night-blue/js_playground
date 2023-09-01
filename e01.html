@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>タグ一覧から、AND検索できるものを絞っていく</title>
+        <link rel="stylesheet" type="text/css" href="test.css">
+   </head>
+    <body>
+
+      <h1>タグ一覧から、AND検索できるものを絞っていく</h1>  
+
+        <div id="container_andsearch" class="container_search">
+            <table id="tag_index_container">
+                <tr>
+                    <th class="tag_index_group">グループ</th>
+                    <th class="tag_index_tag">タグ</th>
+                </tr>
+                <tr>
+                    <td class="tag_index_group">猫</td>
+                    <td class="tag_index_tag">
+                        <input type="button" value="猫1" class="tag">
+                        <input type="button" value="猫2" class="tag">
+                        <input type="button" value="猫3" class="tag">
+                        <input type="button" value="猫4" class="tag">
+                        <input type="button" value="猫5" class="tag">
+                    </td>
+                </tr>
+            </table>
+            <input type="text" value="" class="selected_tag_inputted">
+            <a href="#" class="button button_search">AND検索</a>
+            <button class="button button_clear">リセット</button>
+        </div>
+
+        <div id="container_orsearch" class="container_search">
+            <table id="tag_index_container">
+                <tr>
+                    <th class="tag_index_group">グループ</th>
+                    <th class="tag_index_tag">タグ</th>
+                </tr>
+                <tr>
+                    <td class="tag_index_group">猫</td>
+                    <td class="tag_index_tag">
+                        <input type="button" value="猫1" class="tag">
+                        <input type="button" value="猫2" class="tag">
+                        <input type="button" value="猫3" class="tag">
+                        <input type="button" value="猫4" class="tag">
+                        <input type="button" value="猫5" class="tag">
+                    </td>
+                </tr>
+            </table>
+            <input type="text" value="" class="selected_tag_inputted">
+            <a href="#" class="button button_search">OR検索</a>
+            <button class="button button_clear">リセット</button>
+        </div>
+
+        <script>
+const array = ["猫1,猫2,猫3," , "猫1,猫3,猫4," , "猫1,猫2,猫5," , "猫2,猫3,猫4," , "猫1,猫4,猫5,"];
+
+// 関数を共通化するためのヘルパー関数
+function setupTagToggle(containerId) {
+    const container = document.getElementById(containerId);
+    const tags = container.querySelectorAll('.tag');
+    const clearButton = container.querySelector('.button_clear');
+    const selectedTagInputted = container.querySelector('.selected_tag_inputted');
+    const searchButton = container.querySelector('.button_search');
+
+    tags.forEach((tag) => {
+        tag.addEventListener('click', () => selectTagToggle(tag, selectedTagInputted, searchButton, containerId) );
+    });
+
+    clearButton.addEventListener('click', () => clearSelectedTags(tags, selectedTagInputted, searchButton) );
+};
+
+// タグの選択状態を切り替える関数
+function selectTagToggle(tag, inputField, searchButton, containerId) {
+    const tagValue = encodeURIComponent(tag.value);
+    const selectedTags = inputField.value.split('+');
+
+    if (!selectedTags.includes(tagValue)) {
+        inputField.value += tagValue + "+";
+    } else {
+        inputField.value = inputField.value.replace(`${tagValue}+`, "");
+    }
+
+    tag.classList.toggle('select_tag');
+
+    const setLink = inputField.value.replace(/\+$/, "/");
+
+    if (containerId === 'container_andsearch') {
+        searchButton.setAttribute('href', `search?and=${setLink}`);
+    } else if (containerId === 'container_orsearch') {
+        searchButton.setAttribute('href', `search?or=${setLink}`);
+    } else if (containerId === 'container_andorsearch') {
+
+    }; 
+};
+
+// 選択されたタグをクリアする関数
+function clearSelectedTags(tags, inputField, searchButton) {
+    tags.forEach((tag) => {
+        tag.classList.remove('select_tag');
+    });
+
+    inputField.value = "";
+    searchButton.removeAttribute('href');
+};
+
+// 各コンテナに関数をセットアップ
+window.onload = function() {
+    setupTagToggle('container_andsearch');
+    setupTagToggle('container_orsearch');
+};
+
+
+
+
+        </script>
+        
+    </body>
+</html>
