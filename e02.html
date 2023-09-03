@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>関数を共通化した(複合検索も含めて共通化)</title>
+        <link rel="stylesheet" type="text/css" href="test.css">
+   </head>
+    <body class="search">
+
+      <h1>関数を共通化した(複合検索も含めて共通化)</h1>  
+
+        <h2>AND検索</h2>
+        <div id="container_andsearch" class="container_search">
+            <table id="tag_index_container">
+                <tr>
+                    <th class="tag_index_group">グループ</th>
+                    <th class="tag_index_tag">タグ</th>
+                </tr>
+                <tr>
+                    <td class="tag_index_group">猫</td>
+                    <td class="tag_index_tag">
+                        <input type="button" value="猫1" class="tag">
+                        <input type="button" value="猫2" class="tag">
+                        <input type="button" value="猫3" class="tag">
+                        <input type="button" value="猫4" class="tag">
+                        <input type="button" value="猫5" class="tag">
+                    </td>
+                </tr>
+            </table>
+            <input type="text" value="" class="selected_tag_inputted">
+            <a href="#" class="button button_search">AND検索</a>
+            <button class="button button_clear">リセット</button>
+        </div>
+
+        <h2>OR検索</h2>
+        <div id="container_orsearch" class="container_search">
+            <table id="tag_index_container">
+                <tr>
+                    <th class="tag_index_group">グループ</th>
+                    <th class="tag_index_tag">タグ</th>
+                </tr>
+                <tr>
+                    <td class="tag_index_group">猫</td>
+                    <td class="tag_index_tag">
+                        <input type="button" value="猫1" class="tag">
+                        <input type="button" value="猫2" class="tag">
+                        <input type="button" value="猫3" class="tag">
+                        <input type="button" value="猫4" class="tag">
+                        <input type="button" value="猫5" class="tag">
+                    </td>
+                </tr>
+            </table>
+            <input type="text" value="" class="selected_tag_inputted">
+            <a href="#" class="button button_search">OR検索</a>
+            <button class="button button_clear">リセット</button>
+        </div>
+
+        <h2>複合検索</h2>
+
+        <h3>AND</h3>
+        <div id="container_complex_and" class="container_search">
+            <table id="tag_index_container">
+                <tr>
+                    <th class="tag_index_group">グループ</th>
+                    <th class="tag_index_tag">タグ</th>
+                </tr>
+                <tr>
+                    <td class="tag_index_group">猫</td>
+                    <td class="tag_index_tag">
+                        <input type="button" value="猫1" class="tag">
+                        <input type="button" value="猫2" class="tag">
+                        <input type="button" value="猫3" class="tag">
+                        <input type="button" value="猫4" class="tag">
+                        <input type="button" value="猫5" class="tag">
+                    </td>
+                </tr>
+            </table>
+            <input type="text" value="" class="selected_tag_inputted">
+            <button class="button button_clear hidden">リセット</button>
+        </div>
+
+        <h3>OR</h3>
+        <div id="container_complex_or" class="container_search">
+            <table id="tag_index_container">
+                <tr>
+                    <th class="tag_index_group">グループ</th>
+                    <th class="tag_index_tag">タグ</th>
+                </tr>
+                <tr>
+                    <td class="tag_index_group">猫</td>
+                    <td class="tag_index_tag">
+                        <input type="button" value="猫1" class="tag">
+                        <input type="button" value="猫2" class="tag">
+                        <input type="button" value="猫3" class="tag">
+                        <input type="button" value="猫4" class="tag">
+                        <input type="button" value="猫5" class="tag">
+                    </td>
+                </tr>
+            </table>
+            <input type="text" value="" class="selected_tag_inputted">
+            <div class="complex_button">
+                <a href="#" class="button button_search">複合検索</a>
+                <button class="button button_clear">リセット</button>
+            </div>
+        </div>
+
+        <script>
+const array = ["猫1,猫2,猫3," , "猫1,猫3,猫4," , "猫1,猫2,猫5," , "猫2,猫3,猫4," , "猫1,猫4,猫5,"];
+
+
+// 関数を共通化するためのヘルパー関数
+function setupTagToggle(containerId) {
+    const container = document.getElementById(containerId);
+    const tags = container.querySelectorAll('.tag');
+    const clearButton = container.querySelector('.button_clear');
+    const selectedTagInputted = container.querySelector('.selected_tag_inputted');
+    const searchButton = container.querySelector('.button_search');
+
+    tags.forEach((tag) => {
+        tag.addEventListener('click', () => selectTagToggle(tag, selectedTagInputted, searchButton, containerId) );
+    });
+
+    clearButton.addEventListener('click', () => clearSelectedTags(tags, selectedTagInputted, searchButton, containerId) );
+};
+
+// タグの選択状態を切り替える関数
+function selectTagToggle(tag, inputField, searchButton, containerId) {
+    const tagValue = encodeURIComponent(tag.value);
+    const selectedTags = inputField.value.split('+');
+
+    if (!selectedTags.includes(tagValue)) {
+        inputField.value += tagValue + "+";
+    } else {
+        inputField.value = inputField.value.replace(`${tagValue}+`, "");
+    };
+
+    tag.classList.toggle('select_tag');
+
+    const setLink = inputField.value.replace(/\+$/, "");
+
+    if (inputField.value === "") {
+        searchButton.setAttribute('href', './');
+    } else if (containerId === 'container_andsearch') {
+        searchButton.setAttribute('href', `results?and=${setLink}`);
+    } else if (containerId === 'container_orsearch') {
+        searchButton.setAttribute('href', `results?or=${setLink}`);
+    } else if (containerId === 'container_complex_and') {
+        const setLinkComplexOR = document.getElementById('container_complex_or').querySelector('.selected_tag_inputted').value.replace(/\+$/, "");
+        document.getElementById('container_complex_or').querySelector('.button_search').setAttribute('href', `results?and=${setLink}&or=${setLinkComplexOR}`);
+    } else if (containerId === 'container_complex_or') {
+        const setLinkComplexAnd = document.getElementById('container_complex_and').querySelector('.selected_tag_inputted').value.replace(/\+$/, "");
+        searchButton.setAttribute('href', `results?and=${setLinkComplexAnd}&or=${setLink}`);
+    }; 
+
+};
+
+// 選択されたタグをクリアする関数
+function clearSelectedTags(tags, inputField, searchButton, containerId) {
+    tags.forEach((tag) => {
+        tag.classList.remove('select_tag');
+    });
+
+    inputField.value = "";
+    searchButton.removeAttribute('href');
+
+    if (containerId === 'container_complex_or') {
+        const complexOrTags = document.getElementById('container_complex_and').querySelectorAll('.tag');
+        const complexOrselectedTagInputted = document.getElementById('container_complex_and').querySelector('.selected_tag_inputted');
+        const complexOrsearchButton = document.getElementById('container_complex_and').querySelector('.button_search');
+
+        complexOrTags.forEach((tag) => {
+            tag.classList.remove('select_tag');
+        });
+
+        complexOrselectedTagInputted.value = "";
+        complexOrsearchButton.removeAttribute('href');
+    };
+};
+
+// 各コンテナに関数をセットアップ
+window.onload = function() {
+    setupTagToggle('container_andsearch');
+    setupTagToggle('container_orsearch');
+    setupTagToggle('container_complex_and');
+    setupTagToggle('container_complex_or');
+};
+
+
+
+        </script>
+        
+        <footer><a href="./">テスト一覧へ戻る</a></footer>
+    </body>
+</html>

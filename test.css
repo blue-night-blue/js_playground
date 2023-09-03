@@ -204,5 +204,25 @@ footer{
     background-color: yellow;
 }
 
+.complex_button{
+    margin-top: 50px;
+}
 
+.search h2,
+.search h3
+{
+    margin: 0;
+    font-size: 16px;
+}
 
+.search h2{
+    background-color: #faf;
+}
+
+.search h3{
+    background-color: #ffa;
+}
+
+.hidden{
+    display: none;
+}
