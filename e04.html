@@ -55,7 +55,7 @@
             </div>
 
             <div class="complex_button">
-                <a href="#" class="button button_search">複合検索</a>
+                <a href="" class="button button_search">複合検索</a>
                 <button class="button button_clear">リセット</button>
             </div>
 
@@ -72,6 +72,13 @@ const array = ["猫1,猫2,猫3," , "猫1,猫3,猫4," , "猫1,猫2,猫5," , "猫2
 // 各コンテナに関数をセットアップ
 window.onload = function() {
     setupTagToggleComplex('container_complex');
+
+    const inputFields = document.querySelectorAll('.selected_tag_inputted');
+    window.addEventListener('pageshow', ()=> {
+        inputFields.forEach((input) => {
+            input.value = "";
+        });
+    });    
 };
 
 // 関数を共通化するためのヘルパー関数
