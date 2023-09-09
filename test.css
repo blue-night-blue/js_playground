@@ -200,7 +200,8 @@ footer{
     display: block;
 }
 
-.select_tag{
+.select_tag,
+.tag.select_tag{
     background-color: yellow;
 }
 
@@ -222,3 +223,13 @@ footer{
 .search h3{
     background-color: #ffa;
 }
+
+.tag{
+    background-color: #fff;
+}
+
+.non_exist{
+    background-color: #eee;
+}
+
+
