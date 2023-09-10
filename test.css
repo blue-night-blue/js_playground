@@ -26,6 +26,10 @@ footer{
     margin-top: 2em;
 }
 
+input{
+    border: 1px solid #000;
+    border-radius: 5px;
+}
 
 
 
@@ -231,6 +235,8 @@ footer{
 .not_exist,
 .tag.not_exist{
     background-color: #eee;
+    color: #aaa;
+    border: 1px solid #aaa;
 }
 
 
