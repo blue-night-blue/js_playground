@@ -1,10 +1,6 @@
-const array = ["猫1,猫2,猫3," , "猫1,猫3,猫4," , "猫1,猫2,猫5," , "猫2,猫3,猫4," , "猫1,猫4,猫5,"];
+const array = JSON.parse(document.getElementById('json_string').getAttribute("data-array"));
 let currentArray = [...array];
-
-function filterArray(value) {
-    currentArray = currentArray.filter(item => item.includes(value));
-    console.log(currentArray);
-}
+console.log(currentArray);
 
 window.onload = ()=> {
     const containerAnd = document.getElementById('container_and');
@@ -27,6 +23,7 @@ window.onload = ()=> {
     clearButton.addEventListener('click', () => { 
         clearSelectedTags(andTags, andSelectedTagInputted, searchButton);
         clearSelectedTags(orTags, orSelectedTagInputted, searchButton);
+        console.log(currentArray);
     });
 
     // ブラウザバックした際に隠れinputをクリアする
@@ -38,11 +35,22 @@ window.onload = ()=> {
 
 // タグの選択状態を切り替え、リンクをセットする関数
 function selectTagToggleAnd(tag, inputField, searchButton) {
-    filterArray(tag.value)
+    if(tag.classList.contains('select_tag') || tag.classList.contains('not_exist') ){
+        return;
+    }
+
+    currentArray = currentArray.filter(item => item.includes(tag.value));
 
     if(currentArray.length!==0){
         tag.classList.add('select_tag'); 
-        tag.classList.remove('exist'); 
+        const otherAndTags = document.getElementById('container_and').querySelectorAll('.tag');
+        console.log(currentArray);
+ 
+        otherAndTags.forEach((otherAndTag) => {
+            if(!currentArray.some( (item)=>item.includes(otherAndTag.value) ) ){
+                otherAndTag.classList.add('not_exist');
+            };
+        });
 
         const tagValue = encodeURIComponent(tag.value);
         const selectedTags = inputField.value.split('+');
@@ -66,8 +74,6 @@ function selectTagToggleAnd(tag, inputField, searchButton) {
             searchButton.setAttribute('href', `results?and=${setLinkAnd}&or=${setLinkOr}`)
         }; 
     };
-
-
 };
 
 function selectTagToggleOr(tag, inputField, searchButton) {
@@ -100,8 +106,10 @@ function selectTagToggleOr(tag, inputField, searchButton) {
 function clearSelectedTags(tags, inputField, searchButton) {
     tags.forEach((tag) => {
         tag.classList.remove('select_tag');
+        tag.classList.remove('not_exist');
     });
     inputField.value = "";
     searchButton.removeAttribute('href');
+    currentArray = array;
 };
 
